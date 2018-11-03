@@ -25,12 +25,22 @@ const data = {
 }
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {value: ''};
+
+    this.updateSelection = this.updateSelection.bind(this);
+  }
+  updateSelection(event) {
+    this.setState({value: event.target.value});
+  }
+  
   render() {
     return (
       <div className="App">
-      <select>
+      <select value={this.state.value} onChange={this.updateSelection}>
       <option value="">-- Pick A Model --</option>
-    {Object.keys(data).map(computer => <option value="name">{`${computer} ( ${data[computer].year})`}</option>)} 
+    {Object.keys(data).map(computer => <option value= {computer}>{`${computer} ( ${data[computer].year})`}</option>)} 
       </select>
       </div>
     );
